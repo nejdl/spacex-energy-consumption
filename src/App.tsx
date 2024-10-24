@@ -6,11 +6,13 @@ import LaunchList from './components/LaunchList/LaunchList';
 
 function App() {
   return (
-    <Container component="main">
+    <>
       <Header />
-      <LaunchList />
-      <Chart />
-    </Container>
+      <Container component="main" maxWidth={false}>
+        <LaunchList />
+        <Chart />
+      </Container>
+    </>
   );
 }
 
