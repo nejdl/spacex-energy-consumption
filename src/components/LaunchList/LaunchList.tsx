@@ -1,18 +1,21 @@
+import { CircularProgress } from '@mui/material';
 import { useLaunchListQuery } from '../../generated/graphql';
+import Error from '../UI/Error/Error';
+import { Launch } from '../../generated/graphql';
 
-const LaunchList = () => {
+const LaunchList: React.FC = () => {
   const { data, loading, error } = useLaunchListQuery();
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  if (loading) return <CircularProgress />;
+  if (error) return <Error message={error.message} />;
 
   console.log(data);
 
   return (
     <ul>
-      {data?.launches?.map((launch) => (
-        <li key={launch?.id}>{launch?.mission_name}</li>
-      ))}
+      {data?.launches?.map(
+        (launch) => launch && <li key={launch.id}>{launch.mission_name}</li>
+      )}
     </ul>
   );
 };

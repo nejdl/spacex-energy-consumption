@@ -4,10 +4,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { Container } from '@mui/material';
 
 import Chart from './components/Chart/Chart';
-import Header from './components/Header/Header';
+import Header from './components/Layout/Header/Header';
 import LaunchList from './components/LaunchList/LaunchList';
 
-function App() {
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -18,6 +18,6 @@ function App() {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
 export default App;

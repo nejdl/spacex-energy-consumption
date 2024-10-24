@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 
-const Header = () => {
+const Header: React.FC = () => {
   const title = 'SpaceX Energy Tracker';
   const subtitle = 'A tracker for SpaceX launch energy use';
 
