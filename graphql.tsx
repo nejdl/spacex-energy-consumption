@@ -898,7 +898,6 @@ export type Rocket = {
   country?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   diameter?: Maybe<Distance>;
-  energy?: Maybe<Scalars['Int']['output']>;
   engines?: Maybe<RocketEngines>;
   first_flight?: Maybe<Scalars['Date']['output']>;
   first_stage?: Maybe<RocketFirstStage>;
@@ -1339,20 +1338,19 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
-export type LaunchesQueryVariables = Exact<{
+export type GetLaunchesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type LaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename: 'Launch', id?: string | null, mission_name?: string | null, launch_year?: string | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket?: { __typename?: 'Rocket', energy?: number | null, height?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null } | null } | null } | null> | null };
+export type GetLaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', id?: string | null, mission_name?: string | null, launch_year?: string | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket?: { __typename?: 'Rocket', height?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null } | null } | null } | null> | null };
 
 
-export const LaunchesDocument = gql`
-    query Launches($limit: Int, $offset: Int) {
+export const GetLaunchesDocument = gql`
+    query GetLaunches($limit: Int, $offset: Int) {
   launches(limit: $limit, offset: $offset) {
     id
-    __typename
     mission_name
     launch_year
     rocket {
@@ -1364,7 +1362,6 @@ export const LaunchesDocument = gql`
         mass {
           kg
         }
-        energy @client
       }
     }
   }
@@ -1372,35 +1369,35 @@ export const LaunchesDocument = gql`
     `;
 
 /**
- * __useLaunchesQuery__
+ * __useGetLaunchesQuery__
  *
- * To run a query within a React component, call `useLaunchesQuery` and pass it any options that fit your needs.
- * When your component renders, `useLaunchesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetLaunchesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLaunchesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useLaunchesQuery({
+ * const { data, loading, error } = useGetLaunchesQuery({
  *   variables: {
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
  *   },
  * });
  */
-export function useLaunchesQuery(baseOptions?: Apollo.QueryHookOptions<LaunchesQuery, LaunchesQueryVariables>) {
+export function useGetLaunchesQuery(baseOptions?: Apollo.QueryHookOptions<GetLaunchesQuery, GetLaunchesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LaunchesQuery, LaunchesQueryVariables>(LaunchesDocument, options);
+        return Apollo.useQuery<GetLaunchesQuery, GetLaunchesQueryVariables>(GetLaunchesDocument, options);
       }
-export function useLaunchesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchesQuery, LaunchesQueryVariables>) {
+export function useGetLaunchesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetLaunchesQuery, GetLaunchesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LaunchesQuery, LaunchesQueryVariables>(LaunchesDocument, options);
+          return Apollo.useLazyQuery<GetLaunchesQuery, GetLaunchesQueryVariables>(GetLaunchesDocument, options);
         }
-export function useLaunchesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<LaunchesQuery, LaunchesQueryVariables>) {
+export function useGetLaunchesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetLaunchesQuery, GetLaunchesQueryVariables>) {
           const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<LaunchesQuery, LaunchesQueryVariables>(LaunchesDocument, options);
+          return Apollo.useSuspenseQuery<GetLaunchesQuery, GetLaunchesQueryVariables>(GetLaunchesDocument, options);
         }
-export type LaunchesQueryHookResult = ReturnType<typeof useLaunchesQuery>;
-export type LaunchesLazyQueryHookResult = ReturnType<typeof useLaunchesLazyQuery>;
-export type LaunchesSuspenseQueryHookResult = ReturnType<typeof useLaunchesSuspenseQuery>;
-export type LaunchesQueryResult = Apollo.QueryResult<LaunchesQuery, LaunchesQueryVariables>;
+export type GetLaunchesQueryHookResult = ReturnType<typeof useGetLaunchesQuery>;
+export type GetLaunchesLazyQueryHookResult = ReturnType<typeof useGetLaunchesLazyQuery>;
+export type GetLaunchesSuspenseQueryHookResult = ReturnType<typeof useGetLaunchesSuspenseQuery>;
+export type GetLaunchesQueryResult = Apollo.QueryResult<GetLaunchesQuery, GetLaunchesQueryVariables>;

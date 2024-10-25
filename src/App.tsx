@@ -1,11 +1,9 @@
 import theme from './theme';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Box, Container } from '@mui/material';
-
-import Chart from './components/Chart/Chart';
+import { Box } from '@mui/material';
 import Header from './components/Layout/Header/Header';
-import Launches from './components/Launches/Launches';
+import Dashboard from './components/Layout/Dashboard/Dashboard';
 
 const App: React.FC = () => {
   return (
@@ -19,20 +17,7 @@ const App: React.FC = () => {
         }}
       >
         <Header />
-        <Container
-          component="main"
-          maxWidth={false}
-          disableGutters
-          sx={{
-            display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
-            overflow: 'hidden',
-            height: '100%',
-          }}
-        >
-          <Launches />
-          <Chart />
-        </Container>
+        <Dashboard />
       </Box>
     </ThemeProvider>
   );

@@ -1,7 +1,9 @@
 schema:
   - https://spacex-production.up.railway.app/graphql
+  - ./src/utils/schema/client-schema.graphql
 documents:
   - ./src/components/**/*.{ts,tsx}
+  - ./src/utils/queries/**/*.{ts,tsx}
 generates:
   src/generated/graphql.tsx:
     plugins:

@@ -1,25 +1,10 @@
 import { Box } from '@mui/material';
-import { Launch, useGetLaunchesQuery } from '../../generated/graphql';
-import Error from '../UI/Error/Error';
-import Loading from '../UI/Loading/Loading';
+import { Launch, useGetLaunchesQuery } from '../../../graphql';
 import Info from './Info/Info';
 import LaunchList from './LaunchList/LaunchList';
+import { LaunchListProps } from '../../utils/types/types';
 
-const Launches: React.FC = () => {
-  const limit = 100;
-  const offset = 0;
-  const { data, loading, error } = useGetLaunchesQuery({
-    variables: {
-      limit: limit,
-      offset: offset,
-    },
-  });
-
-  if (loading) return <Loading />;
-  if (error) return <Error message={error.message} />;
-
-  console.log(data?.launches);
-
+const Launches: React.FC<LaunchListProps> = ({ launches }) => {
   // TO DO: check how to write type safety correctly for launches map
   return (
     <Box
@@ -30,13 +15,7 @@ const Launches: React.FC = () => {
       }}
     >
       <Info />
-      <LaunchList
-        launches={
-          data?.launches?.filter(
-            (launch): launch is Launch => launch !== null
-          ) || []
-        }
-      />
+      <LaunchList launches={launches} />
     </Box>
   );
 };

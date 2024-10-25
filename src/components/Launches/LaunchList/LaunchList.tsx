@@ -1,13 +1,9 @@
 import React from 'react';
 import { List } from '@mui/material';
-import { Launch } from '../../../generated/graphql';
 import LaunchItem from './LaunchItem/LaunchItem';
 import { useReactiveVar } from '@apollo/client';
-import { selectedLaunchIdsVar } from '../../../cache';
-
-interface LaunchListProps {
-  launches: Launch[];
-}
+import { selectedLaunchIdsVar } from '../../../utils/cache/cache';
+import { LaunchListProps } from '../../../utils/types/types';
 
 const LaunchList: React.FC<LaunchListProps> = ({ launches }) => {
   const selectedLaunchIds = useReactiveVar(selectedLaunchIdsVar);

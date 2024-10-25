@@ -4,8 +4,9 @@ import {
   Checkbox,
   ListItemButton,
 } from '@mui/material';
-import { Launch } from '../../../../generated/graphql';
+import { Launch } from '../../../../../graphql';
 import LaunchInformation from './LaunchInformation/LaunchInformation';
+import { selectedLaunchIdsVar } from '../../../../utils/cache/cache';
 
 interface LaunchItemProps {
   launch: Launch;
@@ -18,10 +19,18 @@ const LaunchItem: React.FC<LaunchItemProps> = ({
   isSelected,
   toggleLaunchSelection,
 }) => {
+  const handleClick = () => {
+    // only allow 5 launches to be selected
+    if (selectedLaunchIdsVar().length < 5 || isSelected) {
+      toggleLaunchSelection(launch.id || '');
+    }
+  };
+
   return (
     <ListItemButton
       dense
-      onClick={() => toggleLaunchSelection(launch.id || '')}
+      onClick={handleClick}
+      disabled={selectedLaunchIdsVar().length >= 5 && !isSelected}
       sx={{
         bgcolor: isSelected ? 'secondary.main' : 'inherit',
         borderTop: '1px solid',

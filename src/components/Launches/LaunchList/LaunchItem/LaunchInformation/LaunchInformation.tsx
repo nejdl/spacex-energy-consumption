@@ -1,9 +1,5 @@
 import { Box, ListItemText, Typography } from '@mui/material';
-import { Launch } from '../../../../../generated/graphql';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
+import { Launch } from '../../../../../../graphql';
 
 interface LaunchInformationProps {
   launch: Launch;
