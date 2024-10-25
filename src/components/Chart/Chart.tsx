@@ -1,6 +1,11 @@
 import { Box } from '@mui/material';
+import { selectedLaunchIdsVar } from '../../cache';
+import { useReactiveVar } from '@apollo/client';
 
 const Chart: React.FC = () => {
+  const selectedLaunchIds = useReactiveVar(selectedLaunchIdsVar);
+  const displaySelectedIds = selectedLaunchIds.join(', ');
+
   return (
     <Box
       sx={{
@@ -12,7 +17,7 @@ const Chart: React.FC = () => {
         borderColor: 'primary.main',
       }}
     >
-      Chart
+      {displaySelectedIds}
     </Box>
   );
 };

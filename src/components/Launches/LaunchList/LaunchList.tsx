@@ -1,21 +1,24 @@
-import React, { useState } from 'react';
-import { List, ListItem, ListItemText, Checkbox } from '@mui/material';
+import React from 'react';
+import { List } from '@mui/material';
 import { Launch } from '../../../generated/graphql';
 import LaunchItem from './LaunchItem/LaunchItem';
+import { useReactiveVar } from '@apollo/client';
+import { selectedLaunchIdsVar } from '../../../cache';
 
 interface LaunchListProps {
   launches: Launch[];
 }
 
 const LaunchList: React.FC<LaunchListProps> = ({ launches }) => {
-  const [selectedLaunchIds, setSelectedLaunchIds] = useState<string[]>([]);
+  const selectedLaunchIds = useReactiveVar(selectedLaunchIdsVar);
 
   const toggleLaunchSelection = (launchId: string) => {
-    setSelectedLaunchIds((prev) =>
-      prev.includes(launchId)
-        ? prev.filter((id) => id !== launchId)
-        : [...prev, launchId]
-    );
+    const currentSelected = selectedLaunchIdsVar();
+    if (currentSelected.includes(launchId)) {
+      selectedLaunchIdsVar(currentSelected.filter((id) => id !== launchId));
+    } else {
+      selectedLaunchIdsVar([...currentSelected, launchId]);
+    }
   };
 
   return (

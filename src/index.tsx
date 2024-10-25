@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
-
+import { ApolloClient, ApolloProvider } from '@apollo/client';
+import { cache } from './cache';
 const client = new ApolloClient({
   uri: 'https://spacex-production.up.railway.app/graphql',
-  cache: new InMemoryCache(),
+  cache,
 });
 
 const root = ReactDOM.createRoot(

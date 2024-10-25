@@ -5,7 +5,7 @@ const Header: React.FC = () => {
   const subtitle = 'A tracker for SpaceX launch energy use';
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Toolbar
         sx={{
           justifyContent: 'space-between',
