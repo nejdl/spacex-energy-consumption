@@ -6,11 +6,20 @@ const Header: React.FC = () => {
 
   return (
     <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
-        <Typography variant="h6" component="h1">
+      <Toolbar
+        sx={{
+          justifyContent: 'space-between',
+          flexDirection: { xs: 'column', sm: 'row' },
+        }}
+      >
+        <Typography variant="h6" component="h1" sx={{ textAlign: 'center' }}>
           {title}
         </Typography>
-        <Typography variant="subtitle1" component="h2">
+        <Typography
+          variant="subtitle1"
+          component="h2"
+          sx={{ textAlign: 'center' }}
+        >
           {subtitle}
         </Typography>
       </Toolbar>

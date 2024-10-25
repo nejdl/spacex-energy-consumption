@@ -1341,42 +1341,31 @@ export type Uuid_Comparison_Exp = {
 export type GetLaunchesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
-  order?: InputMaybe<Scalars['String']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetLaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', id?: string | null, mission_name?: string | null, launch_date_utc?: any | null, launch_year?: string | null, launch_success?: boolean | null, launch_site?: { __typename?: 'LaunchSite', site_name?: string | null } | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket_type?: string | null, rocket?: { __typename?: 'Rocket', id?: string | null, name?: string | null, company?: string | null, country?: string | null, cost_per_launch?: number | null, height?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null, diameter?: { __typename?: 'Distance', meters?: number | null } | null } | null } | null } | null> | null };
+export type GetLaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', id?: string | null, mission_name?: string | null, launch_year?: string | null, launch_success?: boolean | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket_type?: string | null, rocket?: { __typename?: 'Rocket', height?: { __typename?: 'Distance', meters?: number | null } | null, diameter?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null } | null } | null } | null> | null };
 
 
 export const GetLaunchesDocument = gql`
-    query GetLaunches($limit: Int, $offset: Int, $order: String, $sort: String) {
-  launches(limit: $limit, offset: $offset, order: $order, sort: $sort) {
+    query GetLaunches($limit: Int, $offset: Int) {
+  launches(limit: $limit, offset: $offset) {
     id
     mission_name
-    launch_date_utc
     launch_year
-    launch_site {
-      site_name
-    }
     launch_success
     rocket {
       rocket_name
       rocket_type
       rocket {
-        id
-        name
-        company
-        country
         height {
+          meters
+        }
+        diameter {
           meters
         }
         mass {
           kg
-        }
-        cost_per_launch
-        diameter {
-          meters
         }
       }
     }
@@ -1398,8 +1387,6 @@ export const GetLaunchesDocument = gql`
  *   variables: {
  *      limit: // value for 'limit'
  *      offset: // value for 'offset'
- *      order: // value for 'order'
- *      sort: // value for 'sort'
  *   },
  * });
  */

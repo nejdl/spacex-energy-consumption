@@ -1,21 +1,39 @@
 import theme from './theme';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import Chart from './components/Chart/Chart';
 import Header from './components/Layout/Header/Header';
-import LaunchList from './components/LaunchList/LaunchList';
+import Launches from './components/Launches/Launches';
 
 const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
-      <Container component="main" maxWidth={false}>
-        <LaunchList />
-        <Chart />
-      </Container>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100dvh',
+        }}
+      >
+        <Header />
+        <Container
+          component="main"
+          maxWidth={false}
+          disableGutters
+          sx={{
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            overflow: 'hidden',
+            height: '100%',
+          }}
+        >
+          <Launches />
+          <Chart />
+        </Container>
+      </Box>
     </ThemeProvider>
   );
 };
