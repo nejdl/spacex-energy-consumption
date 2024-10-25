@@ -1338,49 +1338,84 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']['input']>>;
 };
 
-export type LaunchListQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetLaunchesQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  order?: InputMaybe<Scalars['String']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+}>;
 
 
-export type LaunchListQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', id?: string | null, mission_name?: string | null } | null> | null };
+export type GetLaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename?: 'Launch', id?: string | null, mission_name?: string | null, launch_date_utc?: any | null, launch_year?: string | null, launch_success?: boolean | null, launch_site?: { __typename?: 'LaunchSite', site_name?: string | null } | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket_type?: string | null, rocket?: { __typename?: 'Rocket', id?: string | null, name?: string | null, company?: string | null, country?: string | null, cost_per_launch?: number | null, height?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null, diameter?: { __typename?: 'Distance', meters?: number | null } | null } | null } | null } | null> | null };
 
 
-export const LaunchListDocument = gql`
-    query LaunchList {
-  launches {
+export const GetLaunchesDocument = gql`
+    query GetLaunches($limit: Int, $offset: Int, $order: String, $sort: String) {
+  launches(limit: $limit, offset: $offset, order: $order, sort: $sort) {
     id
     mission_name
+    launch_date_utc
+    launch_year
+    launch_site {
+      site_name
+    }
+    launch_success
+    rocket {
+      rocket_name
+      rocket_type
+      rocket {
+        id
+        name
+        company
+        country
+        height {
+          meters
+        }
+        mass {
+          kg
+        }
+        cost_per_launch
+        diameter {
+          meters
+        }
+      }
+    }
   }
 }
     `;
 
 /**
- * __useLaunchListQuery__
+ * __useGetLaunchesQuery__
  *
- * To run a query within a React component, call `useLaunchListQuery` and pass it any options that fit your needs.
- * When your component renders, `useLaunchListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetLaunchesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetLaunchesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useLaunchListQuery({
+ * const { data, loading, error } = useGetLaunchesQuery({
  *   variables: {
+ *      limit: // value for 'limit'
+ *      offset: // value for 'offset'
+ *      order: // value for 'order'
+ *      sort: // value for 'sort'
  *   },
  * });
  */
-export function useLaunchListQuery(baseOptions?: Apollo.QueryHookOptions<LaunchListQuery, LaunchListQueryVariables>) {
+export function useGetLaunchesQuery(baseOptions?: Apollo.QueryHookOptions<GetLaunchesQuery, GetLaunchesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<LaunchListQuery, LaunchListQueryVariables>(LaunchListDocument, options);
+        return Apollo.useQuery<GetLaunchesQuery, GetLaunchesQueryVariables>(GetLaunchesDocument, options);
       }
-export function useLaunchListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<LaunchListQuery, LaunchListQueryVariables>) {
+export function useGetLaunchesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetLaunchesQuery, GetLaunchesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<LaunchListQuery, LaunchListQueryVariables>(LaunchListDocument, options);
+          return Apollo.useLazyQuery<GetLaunchesQuery, GetLaunchesQueryVariables>(GetLaunchesDocument, options);
         }
-export function useLaunchListSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<LaunchListQuery, LaunchListQueryVariables>) {
+export function useGetLaunchesSuspenseQuery(baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetLaunchesQuery, GetLaunchesQueryVariables>) {
           const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions}
-          return Apollo.useSuspenseQuery<LaunchListQuery, LaunchListQueryVariables>(LaunchListDocument, options);
+          return Apollo.useSuspenseQuery<GetLaunchesQuery, GetLaunchesQueryVariables>(GetLaunchesDocument, options);
         }
-export type LaunchListQueryHookResult = ReturnType<typeof useLaunchListQuery>;
-export type LaunchListLazyQueryHookResult = ReturnType<typeof useLaunchListLazyQuery>;
-export type LaunchListSuspenseQueryHookResult = ReturnType<typeof useLaunchListSuspenseQuery>;
-export type LaunchListQueryResult = Apollo.QueryResult<LaunchListQuery, LaunchListQueryVariables>;
+export type GetLaunchesQueryHookResult = ReturnType<typeof useGetLaunchesQuery>;
+export type GetLaunchesLazyQueryHookResult = ReturnType<typeof useGetLaunchesLazyQuery>;
+export type GetLaunchesSuspenseQueryHookResult = ReturnType<typeof useGetLaunchesSuspenseQuery>;
+export type GetLaunchesQueryResult = Apollo.QueryResult<GetLaunchesQuery, GetLaunchesQueryVariables>;
