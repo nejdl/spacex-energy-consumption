@@ -17,7 +17,6 @@ const InfoCard: React.FC<InfoCardProps> = ({
       elevation={1}
       sx={{
         padding: 2,
-        margin: 2,
         bgcolor: `${colorScheme}.light`,
         color: `${colorScheme}.contrastText`,
         borderRadius: 1,

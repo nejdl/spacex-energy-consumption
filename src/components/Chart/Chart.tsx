@@ -1,13 +1,12 @@
 import { Box } from '@mui/material';
-import { selectedLaunchIdsVar } from '../../utils/cache/cache';
+import { selectedLaunchesVar } from '../../utils/cache/cache';
 import { useReactiveVar } from '@apollo/client';
 import InfoCard from '../UI/InfoCard/InfoCard';
-import { LaunchListProps } from '../../utils/types/types';
+import BarChart from './BarChart/BarChart';
 
-const Chart: React.FC<LaunchListProps> = ({ launches }) => {
-  const selectedLaunchIds = useReactiveVar(selectedLaunchIdsVar);
+const Chart: React.FC = () => {
+  const selectedLaunches = useReactiveVar(selectedLaunchesVar);
 
-  // const displaySelectedIds = selectedLaunchIds.join(', ');
   return (
     <Box
       sx={{
@@ -21,14 +20,15 @@ const Chart: React.FC<LaunchListProps> = ({ launches }) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 2,
       }}
     >
-      {selectedLaunchIds.length > 0 ? (
-        'xxx'
+      {selectedLaunches.length > 0 ? (
+        <BarChart launches={selectedLaunches} />
       ) : (
         <InfoCard
           title="Select multiple launches to compare energy consumption"
-          subtitle="You can select up to 5 launches"
+          subtitle="You can select up to 10 launches"
           colorScheme="primary"
         />
       )}

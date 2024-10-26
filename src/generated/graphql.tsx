@@ -898,7 +898,6 @@ export type Rocket = {
   country?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   diameter?: Maybe<Distance>;
-  energy?: Maybe<Scalars['Int']['output']>;
   engines?: Maybe<RocketEngines>;
   first_flight?: Maybe<Scalars['Date']['output']>;
   first_stage?: Maybe<RocketFirstStage>;
@@ -1345,7 +1344,7 @@ export type LaunchesQueryVariables = Exact<{
 }>;
 
 
-export type LaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename: 'Launch', id?: string | null, mission_name?: string | null, launch_year?: string | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket?: { __typename?: 'Rocket', energy?: number | null, height?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null } | null } | null } | null> | null };
+export type LaunchesQuery = { __typename?: 'Query', launches?: Array<{ __typename: 'Launch', id?: string | null, mission_name?: string | null, launch_year?: string | null, rocket?: { __typename?: 'LaunchRocket', rocket_name?: string | null, rocket?: { __typename?: 'Rocket', height?: { __typename?: 'Distance', meters?: number | null } | null, mass?: { __typename?: 'Mass', kg?: number | null } | null } | null } | null } | null> | null };
 
 
 export const LaunchesDocument = gql`
@@ -1364,7 +1363,6 @@ export const LaunchesDocument = gql`
         mass {
           kg
         }
-        energy @client
       }
     }
   }

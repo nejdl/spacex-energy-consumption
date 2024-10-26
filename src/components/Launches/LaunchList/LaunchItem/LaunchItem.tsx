@@ -6,12 +6,12 @@ import {
 } from '@mui/material';
 import { Launch } from '../../../../../graphql';
 import LaunchInformation from './LaunchInformation/LaunchInformation';
-import { selectedLaunchIdsVar } from '../../../../utils/cache/cache';
+import { selectedLaunchesVar } from '../../../../utils/cache/cache';
 
 interface LaunchItemProps {
   launch: Launch;
   isSelected: boolean;
-  toggleLaunchSelection: (launchId: string) => void;
+  toggleLaunchSelection: (launch: Launch) => void;
 }
 
 const LaunchItem: React.FC<LaunchItemProps> = ({
@@ -20,9 +20,9 @@ const LaunchItem: React.FC<LaunchItemProps> = ({
   toggleLaunchSelection,
 }) => {
   const handleClick = () => {
-    // only allow 5 launches to be selected
-    if (selectedLaunchIdsVar().length < 5 || isSelected) {
-      toggleLaunchSelection(launch.id || '');
+    // only allow 10 launches to be selected
+    if (selectedLaunchesVar().length < 10 || isSelected) {
+      toggleLaunchSelection(launch);
     }
   };
 
@@ -30,7 +30,7 @@ const LaunchItem: React.FC<LaunchItemProps> = ({
     <ListItemButton
       dense
       onClick={handleClick}
-      disabled={selectedLaunchIdsVar().length >= 5 && !isSelected}
+      disabled={selectedLaunchesVar().length >= 10 && !isSelected}
       sx={{
         bgcolor: isSelected ? 'secondary.main' : 'inherit',
         borderTop: '1px solid',

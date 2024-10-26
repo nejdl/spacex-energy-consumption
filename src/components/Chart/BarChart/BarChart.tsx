@@ -1,60 +1,76 @@
-const BarChart: React.FC = () => {
-  //   const theme = useTheme();
+import { LaunchListProps } from '../../../utils/types/types';
+import ReactApexChart from 'react-apexcharts';
+import { ApexOptions } from 'apexcharts';
+import { calculateEnergyConsumption } from '../../../utils/calculations/calculateEnergyConsumption';
 
-  //   const options: ApexOptions = {
-  //     chart: {
-  //       type: 'bar',
-  //       height: 350,
-  //       toolbar: {
-  //         show: false,
-  //       },
-  //     },
-  //     plotOptions: {
-  //       bar: {
-  //         horizontal: false,
-  //         columnWidth: '55%',
-  //         borderRadius: 4,
-  //       },
-  //     },
-  //     dataLabels: {
-  //       enabled: false,
-  //     },
-  //     stroke: {
-  //       show: true,
-  //       width: 2,
-  //       colors: ['transparent'],
-  //     },
-  //     xaxis: {
-  //       categories: data.categories,
-  //     },
-  //     yaxis: {
-  //       title: {
-  //         text: 'Energy Consumption',
-  //       },
-  //     },
-  //     fill: {
-  //       opacity: 1,
-  //     },
-  //     tooltip: {
-  //       y: {
-  //         formatter: function (val) {
-  //           return val + ' units';
-  //         },
-  //       },
-  //     },
-  //     colors: [theme.palette.primary.main],
-  //   };
+const BarChart: React.FC<LaunchListProps> = ({ launches }) => {
+  // process data for chart
+  const chartData = launches
+    .map((launch) => ({
+      missionName: launch.mission_name,
+      rocketName: launch.rocket?.rocket_name,
+      energyConsumption: calculateEnergyConsumption(
+        launch.rocket?.rocket?.mass?.kg ?? 0
+      ),
+    }))
+    .filter((data) => data.energyConsumption > 0);
 
-  //   const series = [
-  //     {
-  //       name: 'Energy Consumption',
-  //       data: data.series,
-  //     },
-  //   ];
+  // series data
+  const series = [
+    {
+      name: 'Energy Consumption',
+      data: chartData.map((data) => data.energyConsumption),
+    },
+  ];
+
+  // chart options
+  const options: ApexOptions = {
+    chart: {
+      type: 'bar',
+      height: 500,
+    },
+    plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '55%',
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    xaxis: {
+      categories: chartData.map(
+        (data) => `${data.missionName} (${data.rocketName})`
+      ),
+      title: {
+        text: 'Mission (Rocket)',
+      },
+    },
+    yaxis: {
+      title: {
+        text: 'Energy Consumption (J)',
+      },
+    },
+    title: {
+      text: 'Launch Energy Consumption',
+      align: 'center',
+    },
+    tooltip: {
+      y: {
+        formatter: (val) => `${val}`,
+      },
+    },
+  };
 
   return (
-    <div>chart</div>
-    // <ReactApexChart options={options} series={series} type="bar" height={350} />
+    <div>
+      <ReactApexChart
+        options={options}
+        series={series}
+        type="bar"
+        height={500}
+      />
+    </div>
   );
 };
 

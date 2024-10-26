@@ -17,7 +17,6 @@ export const LAUNCHES = gql`
           mass {
             kg
           }
-          energy @client
         }
       }
     }
