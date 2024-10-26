@@ -1,28 +1,26 @@
 import { Box, ListItemText, Typography } from '@mui/material';
-import { Launch } from '../../../../../../graphql';
+import { LaunchInformationProps } from '../../../../../utils/types/types';
 
-interface LaunchInformationProps {
-  launch: Launch;
-}
+const LaunchInformation = ({ launch }: LaunchInformationProps) => {
+  const missionName = launch.mission_name;
+  const rocketName = launch.rocket?.rocket_name;
+  const launchYear = launch.launch_year;
 
-const LaunchInformation: React.FC<LaunchInformationProps> = ({ launch }) => {
-  const primaryText = launch.mission_name;
-
+  const primaryText = missionName;
   const secondaryText = (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Typography variant="body2">{launch.rocket?.rocket_name}</Typography>
-      <Typography variant="body2">{launch.launch_year}</Typography>
+      {rocketName && <Typography variant="body2">{rocketName}</Typography>}
+      <Typography variant="body2">{launchYear}</Typography>
     </Box>
   );
+
   return (
-    <>
-      <ListItemText
-        primary={primaryText}
-        secondary={secondaryText}
-        primaryTypographyProps={{ variant: 'h6' }}
-        secondaryTypographyProps={{ component: 'div' }}
-      />
-    </>
+    <ListItemText
+      primary={primaryText}
+      secondary={secondaryText}
+      primaryTypographyProps={{ variant: 'h6' }}
+      secondaryTypographyProps={{ component: 'div' }}
+    />
   );
 };
 

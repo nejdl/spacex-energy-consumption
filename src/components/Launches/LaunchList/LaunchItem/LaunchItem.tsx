@@ -1,27 +1,21 @@
-import {
-  ListItem,
-  ListItemText,
-  Checkbox,
-  ListItemButton,
-} from '@mui/material';
-import { Launch } from '../../../../../graphql';
+import { Checkbox, ListItemButton } from '@mui/material';
 import LaunchInformation from './LaunchInformation/LaunchInformation';
 import { selectedLaunchesVar } from '../../../../utils/cache/cache';
+import { LaunchItemProps } from '../../../../utils/types/types';
+import { useReactiveVar } from '@apollo/client';
 
-interface LaunchItemProps {
-  launch: Launch;
-  isSelected: boolean;
-  toggleLaunchSelection: (launch: Launch) => void;
-}
-
-const LaunchItem: React.FC<LaunchItemProps> = ({
+const LaunchItem = ({
   launch,
   isSelected,
   toggleLaunchSelection,
-}) => {
+}: LaunchItemProps) => {
+  // SELECTED LAUNCHES STATE
+  const selectedLaunches = useReactiveVar(selectedLaunchesVar);
+
+  // TOGGLE LAUNCH SELECTION ON CLICK
   const handleClick = () => {
     // only allow 10 launches to be selected
-    if (selectedLaunchesVar().length < 10 || isSelected) {
+    if (selectedLaunches.length < 10 || isSelected) {
       toggleLaunchSelection(launch);
     }
   };
@@ -30,7 +24,7 @@ const LaunchItem: React.FC<LaunchItemProps> = ({
     <ListItemButton
       dense
       onClick={handleClick}
-      disabled={selectedLaunchesVar().length >= 10 && !isSelected}
+      disabled={selectedLaunches.length >= 10 && !isSelected} // set disabled when max. launches are selected
       sx={{
         bgcolor: isSelected ? 'secondary.main' : 'inherit',
         borderTop: '1px solid',

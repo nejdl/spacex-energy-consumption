@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 import Launches from '../../Launches/Launches';
 import Chart from '../../Chart/Chart';
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
   return (
     <Container
       component="main"
@@ -15,7 +15,6 @@ const Dashboard: React.FC = () => {
         height: '100%',
       }}
     >
-      {/* TO DO: correct type saftey? */}
       <Launches />
       <Chart />
     </Container>

@@ -4,13 +4,14 @@ import { useReactiveVar } from '@apollo/client';
 import InfoCard from '../UI/InfoCard/InfoCard';
 import BarChart from './BarChart/BarChart';
 
-const Chart: React.FC = () => {
+const Chart = () => {
+  // SELECTED LAUNCHES STATE
   const selectedLaunches = useReactiveVar(selectedLaunchesVar);
 
   return (
     <Box
       sx={{
-        flexBasis: '50%',
+        flexBasis: { xs: '60%', sm: '50%' },
         flexGrow: 1,
         overflow: 'scroll',
         bgcolor: 'secondary.light',
@@ -23,7 +24,7 @@ const Chart: React.FC = () => {
         padding: 2,
       }}
     >
-      {selectedLaunches.length > 0 ? (
+      {selectedLaunches.length > 0 ? ( // show chart only if launches are selected, otherwise show info
         <BarChart launches={selectedLaunches} />
       ) : (
         <InfoCard

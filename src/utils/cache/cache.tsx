@@ -1,5 +1,5 @@
 import { InMemoryCache, makeVar } from '@apollo/client';
-import { Launch } from '../../../graphql';
+import { Launch } from '../../generated/graphql';
 
 export const cache = new InMemoryCache({
   typePolicies: {

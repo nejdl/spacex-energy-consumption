@@ -2,17 +2,27 @@ import { LaunchListProps } from '../../../utils/types/types';
 import ReactApexChart from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
 import { calculateEnergyConsumption } from '../../../utils/calculations/calculateEnergyConsumption';
+import { Box, useMediaQuery } from '@mui/material';
 
-const BarChart: React.FC<LaunchListProps> = ({ launches }) => {
+const BarChart = ({ launches }: LaunchListProps) => {
+  // CHECK IF MOBILE
+  const isMobile = useMediaQuery('(max-width:600px)');
+
+  // CHART DATA & OPTIONS
   // process data for chart
   const chartData = launches
-    .map((launch) => ({
-      missionName: launch.mission_name,
-      rocketName: launch.rocket?.rocket_name,
-      energyConsumption: calculateEnergyConsumption(
-        launch.rocket?.rocket?.mass?.kg ?? 0
-      ),
-    }))
+    .map((launch) => {
+      const missionName = launch.mission_name;
+      const rocketName = launch.rocket?.rocket_name;
+      const mass = launch.rocket?.rocket?.mass?.kg ?? 0;
+      const energyConsumption = calculateEnergyConsumption(mass);
+
+      return {
+        missionName: missionName,
+        rocketName: rocketName,
+        energyConsumption: energyConsumption,
+      };
+    })
     .filter((data) => data.energyConsumption > 0);
 
   // series data
@@ -27,12 +37,11 @@ const BarChart: React.FC<LaunchListProps> = ({ launches }) => {
   const options: ApexOptions = {
     chart: {
       type: 'bar',
-      height: 500,
     },
     plotOptions: {
       bar: {
         horizontal: false,
-        columnWidth: '55%',
+        columnWidth: '60%',
       },
     },
     dataLabels: {
@@ -40,15 +49,24 @@ const BarChart: React.FC<LaunchListProps> = ({ launches }) => {
     },
     xaxis: {
       categories: chartData.map(
-        (data) => `${data.missionName} (${data.rocketName})`
+        (data) => `${data.rocketName} | ${data.missionName}`
       ),
       title: {
         text: 'Mission (Rocket)',
+      },
+      labels: {
+        trim: true,
+        maxHeight: isMobile ? 100 : 175, // helps with responsive styling, as it affects height
       },
     },
     yaxis: {
       title: {
         text: 'Energy Consumption (J)',
+      },
+      labels: {
+        formatter: (value) => {
+          return value.toExponential(2); // shorten notation of numbers with many zeros
+        },
       },
     },
     title: {
@@ -57,20 +75,22 @@ const BarChart: React.FC<LaunchListProps> = ({ launches }) => {
     },
     tooltip: {
       y: {
-        formatter: (val) => `${val}`,
+        formatter: (value) => {
+          return value.toExponential(2) + ' J'; // shorten notation of numbers with many zeros
+        },
       },
     },
   };
 
   return (
-    <div>
+    <Box sx={{ width: '100%' }}>
       <ReactApexChart
         options={options}
         series={series}
         type="bar"
-        height={500}
+        height={isMobile ? 300 : 500}
       />
-    </div>
+    </Box>
   );
 };
 

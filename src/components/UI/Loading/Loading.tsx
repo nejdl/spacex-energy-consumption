@@ -1,9 +1,11 @@
 import { Box, CircularProgress } from '@mui/material';
 
-const Loading: React.FC = () => {
+const Loading = () => {
   return (
     <Box
       sx={{
+        flexBasis: { xs: '40%', sm: '50%' },
+        maxWidth: { xs: '100%', sm: 600 },
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

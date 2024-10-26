@@ -1,17 +1,7 @@
-import React from 'react';
 import { Paper, Typography } from '@mui/material';
+import { InfoCardProps } from '../../../utils/types/types';
 
-interface InfoCardProps {
-  title: string;
-  subtitle: string;
-  colorScheme: 'primary' | 'secondary';
-}
-
-const InfoCard: React.FC<InfoCardProps> = ({
-  title,
-  subtitle,
-  colorScheme,
-}) => {
+const InfoCard = ({ title, subtitle, colorScheme }: InfoCardProps) => {
   return (
     <Paper
       elevation={1}
@@ -25,7 +15,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
       <Typography variant="h6" gutterBottom>
         {title}
       </Typography>
-      <Typography variant="body1">{subtitle}</Typography>
+      <Typography variant="body1" sx={{ display: { xs: 'none', sm: 'block' } }}>
+        {subtitle}
+      </Typography>
     </Paper>
   );
 };

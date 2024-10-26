@@ -1,11 +1,11 @@
 import { AppBar, Toolbar, Typography } from '@mui/material';
 
-const Header: React.FC = () => {
+const Header = () => {
   const title = 'SpaceX Energy Tracker';
   const subtitle = 'A tracker for SpaceX launch energy use';
 
   return (
-    <AppBar position="sticky">
+    <AppBar sx={{ position: 'sticky' }}>
       <Toolbar
         sx={{
           justifyContent: 'space-between',

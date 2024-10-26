@@ -1,11 +1,11 @@
-import theme from './theme';
-import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './components/theme/theme';
 import { Box } from '@mui/material';
 import Header from './components/Layout/Header/Header';
 import Dashboard from './components/Layout/Dashboard/Dashboard';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />

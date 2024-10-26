@@ -1,10 +1,7 @@
 import { Typography } from '@mui/material';
+import { ErrorProps } from '../../../utils/types/types';
 
-interface ErrorProps {
-  message: string;
-}
-
-const Error: React.FC<ErrorProps> = ({ message }) => {
+const Error = ({ message }: ErrorProps) => {
   return <Typography color="error">Error: {message}</Typography>;
 };
 
