@@ -35,6 +35,7 @@ Source: [Sensorfactdev GitHub](https://github.com/Sensorfactdev/frontend-assignm
 - [ ] Filter data by user permission
   - [ ] Mock user permission
   - [ ] Query differnt data based on permission
+- [ ] Improve state managment
 - [ ] Increase usability
   - [ ] Maybe group launches by rocket type
   - [ ] Add sorting, filters & search for launch list
@@ -44,7 +45,7 @@ Source: [Sensorfactdev GitHub](https://github.com/Sensorfactdev/frontend-assignm
   - [ ] outsource some variables into overview config file (e.g. max-selection value)
 - [ ] Add testing
 - [ ] Review performance
-  - [ ] Cache calculated energy consumption
+  - [ ] Cache calculated energy
 - [ ] Review accessibility
 
 ## Getting Started
