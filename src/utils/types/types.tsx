@@ -13,6 +13,7 @@ export interface InfoCardProps {
 export interface LaunchItemProps {
   launch: Launch;
   isSelected: boolean;
+  maxLaunchesSelected: boolean;
   toggleLaunchSelection: (launch: Launch) => void;
 }
 

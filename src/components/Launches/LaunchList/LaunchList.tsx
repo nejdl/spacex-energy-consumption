@@ -7,7 +7,10 @@ import { Launch } from '../../../generated/graphql';
 
 const LaunchList = ({ launches }: LaunchListProps) => {
   // SELECTED LAUNCHES STATE
+  // state managment via apollo client & reactive variables (in src/utils/cache/cache.ts)
   const selectedLaunches = useReactiveVar(selectedLaunchesVar);
+  const maxSelection = 10;
+  const maxLaunchesSelected = selectedLaunches.length === maxSelection;
 
   // TOGGLE LAUNCH SELECTION
   const toggleLaunchSelection = (launch: Launch) => {
@@ -33,6 +36,7 @@ const LaunchList = ({ launches }: LaunchListProps) => {
           isSelected={
             selectedLaunches.find((x) => x.id === launch.id) !== undefined
           }
+          maxLaunchesSelected={maxLaunchesSelected}
           toggleLaunchSelection={toggleLaunchSelection}
         />
       ))}

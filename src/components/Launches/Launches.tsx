@@ -1,17 +1,11 @@
-import { Box, Button } from '@mui/material';
+import { Box } from '@mui/material';
 import Info from './Info/Info';
 import LaunchList from './LaunchList/LaunchList';
 import Loading from '../UI/Loading/Loading';
 import Error from '../UI/Error/Error';
 import { Launch, useLaunchesQuery } from '../../generated/graphql';
-import { selectedLaunchesVar } from '../../utils/cache/cache';
-import { useReactiveVar } from '@apollo/client';
 
 const Launches = () => {
-  // SELECTED LAUNCHES STATE
-  // state managment via apollo client & reactive variables (in src/utils/cache/cache.ts)
-  const selectedLaunches = useReactiveVar(selectedLaunchesVar);
-
   // DATA FETCHING
   const limit = 100;
   const offset = 0; // TO DO: add pagination with offset
@@ -35,11 +29,6 @@ const Launches = () => {
     (launch) => launch !== null
   ) as Launch[];
 
-  // RESET SELECTED LAUNCHES
-  const resetSelectedLaunches = () => {
-    selectedLaunchesVar([]);
-  };
-
   return (
     <Box
       sx={{
@@ -48,27 +37,7 @@ const Launches = () => {
         overflow: 'scroll',
       }}
     >
-      <Box
-        sx={{
-          position: { xs: 'static', sm: 'sticky' },
-          top: 0,
-          zIndex: 1,
-          backgroundColor: 'background.paper',
-          padding: 2,
-          boxShadow: 1,
-        }}
-      >
-        <Info />
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={resetSelectedLaunches}
-          sx={{ mt: 2 }}
-          disabled={selectedLaunches.length === 0}
-        >
-          Reset
-        </Button>
-      </Box>
+      <Info />
       <LaunchList launches={launches} />
     </Box>
   );
